@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Manu Tamminen</title>
+    <link>https://manutamminen.github.io/</link>
+    <description>Recent content on Manu Tamminen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 29 Mar 2018 16:20:49 +0300</lastBuildDate>
+    
+	<atom:link href="https://manutamminen.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Kokeilu</title>
+      <link>https://manutamminen.github.io/posts/kokeilu/</link>
+      <pubDate>Thu, 29 Mar 2018 16:20:49 +0300</pubDate>
+      
+      <guid>https://manutamminen.github.io/posts/kokeilu/</guid>
+      <description>TESTING</description>
+    </item>
+    
+    <item>
+      <title>Introducing Awk</title>
+      <link>https://manutamminen.github.io/posts/awk/</link>
+      <pubDate>Tue, 15 Dec 2015 12:08:24 +0300</pubDate>
+      
+      <guid>https://manutamminen.github.io/posts/awk/</guid>
+      <description>In this entry I&amp;rsquo;m going to explain the very basics of a little programming language called Awk. The primary reason why I&amp;rsquo;m advocating the use of Awk (and not for instance Perl or Python) is that Awk is absolutely great for writing very short programs, or one-liners. In fact, in my opinion Awk should never be used for anything longer than one-liners - if your task appears to demand a longer piece of code, it will probably be wiser to choose Perl or Python instead.</description>
+    </item>
+    
+    <item>
+      <title>Pipes, process substitution and why should a biologist ever care</title>
+      <link>https://manutamminen.github.io/posts/process_subst/</link>
+      <pubDate>Sun, 22 Nov 2015 12:48:24 +0300</pubDate>
+      
+      <guid>https://manutamminen.github.io/posts/process_subst/</guid>
+      <description>This is the first entry in my series about how to keep DNA sequence processing as simple as possible. Each entry attempts to teach a useful Unix trick or two, focusing on relevance for biologists who might not have much prior Unix experience. Because of the very clever design choices made by the folks behind Unix, every trick can be combined with everything else in ways that lead to a much greater flexibility and expressiveness than any of the tricks alone - I attempt to demonstrate that in the following posts.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://manutamminen.github.io/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://manutamminen.github.io/about/</guid>
+      <description>sdsdsdsd</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://manutamminen.github.io/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://manutamminen.github.io/contact/</guid>
+      <description> Contact me  
+ Alternatively, for snail-mail or visiting, use
+Manu Tamminen Department of Biology University Hill 20014 University of Turku Finland</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://manutamminen.github.io/non_scientific_media/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://manutamminen.github.io/non_scientific_media/</guid>
+      <description>In non-scientific media Tiedepolitiikka 31.12.2017. In Finnish.
+Turun sanomat 20.11.2017. In Finnish.
+genomeweb 30.9.2015.
+Uutistamo 19.2.2015. In Finnish.
+Kemian teollisuus 21.1.2015.
+Helsingin sanomat 5.8.2014. In Finnish.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://manutamminen.github.io/oneliners/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://manutamminen.github.io/oneliners/</guid>
+      <description>Unix one-liners for fun and profit Reverse complement all sequences in a fasta file.
+paste -d &amp;#34;\n&amp;#34; \  &amp;lt;(grep &amp;#34;&amp;gt;&amp;#34; sequences.fasta) \  &amp;lt;(grep -v &amp;#34;&amp;gt;&amp;#34; sequences.fasta | tr ATGC TACG | rev) \  &amp;gt; reverse_complemented_sequences.fasta &amp;nbsp;
+Prepare a stability file from paired end reads.
+paste \  &amp;lt;(ls *R1*.fastq | awk -F&amp;#34;_&amp;#34; &amp;#39;{print $1}&amp;#39;) \  &amp;lt;(ls *R1*.fastq)\  &amp;lt;(ls *R2*.fastq)\  &amp;gt; stability.txt &amp;nbsp;
+Convert a fastq to a fasta.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://manutamminen.github.io/publications/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://manutamminen.github.io/publications/</guid>
+      <description>Publications In preparation Tamminen M., Spaak J., Caduff L., Schiff H., Montealegre M., Schmid S, Julian T. Highly multiplexed target quantification by barcoded ligation-based assays.
+Schmid S., Julian, T., Tamminen M. nsearch: An open source C++ library for processing next-generation sequencing data.
+Tamminen M., Schmid S., Schiff H., Spaak J., Caduff L., Julian T. epride. A local alignment-based clustering and primer design tool for complex sequence pools.
+Submitted Tamminen, M.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://manutamminen.github.io/research/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://manutamminen.github.io/research/</guid>
+      <description>Research I am applying high throughput genomic tools to understand biological phenomena on microscopic scale. The questions include&amp;hellip;
+Functional structuring of microbial communities  &amp;ldquo;Who is doing what&amp;rdquo; is a lingering question in microbial ecology. The vast amount and diversity of microbial cells in any environment makes genomic screening efforts extremely challenging. For instance, performing millions of PCR reactions to determine the genomic properties of every cell in any microbial system is simply unfeasible using any traditional techniques.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://manutamminen.github.io/welcome/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://manutamminen.github.io/welcome/</guid>
+      <description>I am a molecular biologist specialising in genomics and transcriptomics of single cells and microscopic cell communities. My research directions include...  Determining &#34;who is doing what&#34; in very complex microbial communities. My current focus is on genes for elemental cycles and antibiotic resistance. The research builds on our recently published epicPCR methodology. The figure is adapted from Spencer, Tamminen et al (2016), released under CC BY 4.0. Read more here.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://manutamminen.github.io/welcome/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://manutamminen.github.io/welcome/</guid>
+      <description>I am a molecular biologist specialising in genomics and transcriptomics of single cells and microscopic cell communities. My research directions include...
+{.wp-image-274 .alignleft width=&amp;ldquo;152&amp;rdquo; height=&amp;ldquo;152&amp;rdquo;} Determining \&amp;ldquo;who is doing what\&amp;rdquo; in very complex microbial communities. My current focus is on genes for elemental cycles and antibiotic resistance. The research builds on our recently published epicPCR methodology. The figure is adapted from Spencer, Tamminen et al (2016), released under CC BY 4.</description>
+    </item>
+    
+  </channel>
+</rss>

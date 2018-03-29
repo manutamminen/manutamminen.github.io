@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Introducing Awk</title>
+  <meta property="og:title" content="Introducing Awk" />
+  <meta name="twitter:title" content="Introducing Awk" />
+  <meta name="description" content="In this entry I&rsquo;m going to explain the very basics of a little programming language called Awk. The primary reason why I&rsquo;m advocating the use of Awk (and not for instance Perl or Python) is that Awk is absolutely great for writing very short programs, or one-liners. In fact, in my opinion Awk should never be used for anything longer than one-liners - if your task appears to demand a longer piece of code, it will probably be wiser to choose Perl or Python instead.">
+  <meta property="og:description" content="In this entry I&rsquo;m going to explain the very basics of a little programming language called Awk. The primary reason why I&rsquo;m advocating the use of Awk (and not for instance Perl or Python) is that Awk is absolutely great for writing very short programs, or one-liners. In fact, in my opinion Awk should never be used for anything longer than one-liners - if your task appears to demand a longer piece of code, it will probably be wiser to choose Perl or Python instead.">
+  <meta name="twitter:description" content="In this entry I&rsquo;m going to explain the very basics of a little programming language called Awk. The primary reason why I&rsquo;m advocating the use of Awk (and not for instance Perl or Python) …">
+  <meta name="author" content="Manu Tamminen"/>
+  <meta property="og:image" content="https://manutamminen.github.io/img/lobster3.png" />
+  <meta name="twitter:image" content="https://manutamminen.github.io/img/lobster3.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@mavata" />
+  <meta name="twitter:creator" content="@mavata" />
+  <meta property="og:url" content="https://manutamminen.github.io/posts/awk/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Manu Tamminen" />
+
+  <meta name="generator" content="Hugo 0.37.1" />
+  <link rel="canonical" href="https://manutamminen.github.io/posts/awk/" />
+  <link rel="alternate" href="https://manutamminen.github.io/index.xml" type="application/rss+xml" title="Manu Tamminen">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://manutamminen.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://manutamminen.github.io/css/highlight.min.css" /><link rel="stylesheet" href="https://manutamminen.github.io/css/codeblock.css" />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://manutamminen.github.io">Manu Tamminen</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/posts/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Research" href="/research/">Research</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Publications" href="/publications/">Publications</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Unix tricks" href="/oneliners/">Unix tricks</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="In media" href="/non_scientific_media/">In media</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Contact" href="/contact/">Contact</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Manu Tamminen" href="https://manutamminen.github.io">
+            <img class="avatar-img" src="https://manutamminen.github.io/img/lobster3.png" alt="Manu Tamminen" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              <h2>Introducing Awk</h2>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>In this entry I&rsquo;m going to explain the very basics of a little programming language called Awk. The primary reason why I&rsquo;m advocating the use of Awk (and not for instance Perl or Python) is that Awk is absolutely great for writing very short programs, or one-liners. In fact, in my opinion Awk should never be used for anything longer than one-liners - if your task appears to demand a longer piece of code, it will probably be wiser to choose Perl or Python instead. Combined with the brevity of <a href="/posts/process_subst/">Unix pipes and process substitution</a>, the concise syntax of Awk permits extremely powerful one-liners. The first example in this entry describes constructing a stability file for Mothur, described <a href="http://www.mothur.org/wiki/MiSeq_SOP#Getting_started">here</a>. You can test everything described in this entry using <a href="http://www.mothur.org/w/images/d/d6/MiSeqSOPData.zip">this example data set</a>. After uncompressing the data set, check the fastq files in the directory using <code>ls *.fastq</code>. You should see the following:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">F3D0_S188_L001_R1_001.fastq
+F3D0_S188_L001_R2_001.fastq
+F3D141_S207_L001_R1_001.fastq
+F3D141_S207_L001_R2_001.fastq
+F3D142_S208_L001_R1_001.fastq
+F3D142_S208_L001_R2_001.fastq
+F3D143_S209_L001_R1_001.fastq
+F3D143_S209_L001_R2_001.fastq
+F3D144_S210_L001_R1_001.fastq
+F3D144_S210_L001_R2_001.fastq
+F3D145_S211_L001_R1_001.fastq
+F3D145_S211_L001_R2_001.fastq
+...</code></pre></div>
+<p>Each fastq file is present in two flavors: <strong>R1</strong> in the name indicates a forward read from Illumina MiSeq and <strong>R2</strong> a reverse read. Mothur has a built-in functionality to join these reads into single contigs - however for that it needs something called a <em>stability file</em>. A stability file is a tab-separated table containing the sample names and the associated forward and reverse read file names. Mothur tutorial provides such file but does not describe how it can be constructed.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">F3D0 F3D0_S188_L001_R1_001.fastq F3D0_S188_L001_R2_001.fastq 
+F3D141 F3D141_S207_L001_R1_001.fastq F3D141_S207_L001_R2_001.fastq 
+F3D142 F3D142_S208_L001_R1_001.fastq F3D142_S208_L001_R2_001.fastq
+F3D143 F3D143_S209_L001_R1_001.fastq F3D143_S209_L001_R2_001.fastq 
+F3D144 F3D144_S210_L001_R1_001.fastq F3D144_S210_L001_R2_001.fastq 
+...</code></pre></div>
+<p>Columns two and three of a stability file correspond to the forward and reverse read file names, respectively, and column one corresponds to the beginning of the file name that in this example is also the sample name. Extracting the sample names from the file names is a task for which we need Awk. To cut the chase, here&rsquo;s how it&rsquo;s done:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">paste &lt;<span class="o">(</span>ls *R1*.fastq <span class="p">|</span> awk -F_ <span class="s1">&#39;{print $1}&#39;</span><span class="o">)</span> &lt;<span class="o">(</span>ls *R1*.fastq<span class="o">)</span> &lt;<span class="o">(</span>ls *R2*.fastq<span class="o">)</span></code></pre></div>
+<p>If you&rsquo;ve read the <a href="/posts/process_subst/">previous entry</a>, you might recognize the process substitution syntax - that is, the <code>&lt;( ... )</code> -structures that are feeding stuff to the <em>paste</em> command. Please review the <a href="/posts/process_subst/">previous entry</a> if you&rsquo;re not familiar with process substitution. Awk can be used for a lot of things but one of the most common uses is splitting lines at particular characters. The <code>-F</code> switch specifies the character by which the line is to be chopped. The resulting pieces can be accessed using variables <code>$1</code>, <code>$2</code>, <code>$3</code> etc. The entire non-chopped line is also available under variable <code>$0</code>. Armed with this information, let&rsquo;s take apart the first process substitution part of the command pipeline above:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">ls *R1*.fastq <span class="p">|</span> awk -F_ <span class="s1">&#39;{print $1}&#39;</span></code></pre></div>
+<p>What&rsquo;s happening here is that we&rsquo;re first getting a list of files that have letters <strong>R1</strong> in their name and a suffix <em>fastq</em> , and piping this to Awk where it&rsquo;s processed line by line. First we&rsquo;re telling Awk to split the lines at each occurrence of <code>_</code> by providing the <code>-F_</code> switch. Next comes the actual Awk program - that is the part specified inside the &lsquo;-characters. For reasons that I will not discuss here, all print statements in Awk must be surrounded by curly brackets. By specifying variable $1 for the print statement, the first part of the splitted line gets printed. Experiment by yourself and see what happens if you choose <code>$2</code>, <code>$3</code> or <code>$0</code> instead. You can also add your own text to the Awk print statement, for instance</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">ls *R1*.fastq <span class="p">|</span> awk -F_ <span class="s1">&#39;{print &#34;I am sample &#34; $1}&#39;</span> </code></pre></div>
+<p>In this example it really makes no sense but in other cases can be very useful. One simple example is converting a <em>fastq</em> to a <em>fasta</em>. This is done simply by taking the two first lines of each <em>fastq</em> entry and prepending the first line by <code>&gt;</code>-character. Here&rsquo;s how it goes:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">cat file.fastq <span class="p">|</span> paste -d, - - - - <span class="p">|</span> awk -F, <span class="s1">&#39;{print &#34;&gt;&#34; $1 &#34;\n&#34; $2 &#34;\n&#34;}&#39;</span> &gt; file.fasta </code></pre></div>
+<p>What&rsquo;s going on here is that the four successive lines of a <em>fastq</em> are concatenated into a single line separated by commas. This functionality is provided by the <code>paste -d, - - - -</code> construct, where the <code>-d,</code> switch tells <em>paste</em> to use comma as a line separator, and the four <code>-</code>-characters inform <em>paste</em> to read in four consecutive lines at a time. The output from <em>paste</em> - the four concatenated lines - is piped to Awk. Awk is told to use comma as line splitting character - this is how we parse the concatenated lines of <em>fastq</em> back into separate lines, available in variables <code>$1</code>, <code>$2</code>, <code>$3</code> and <code>$4</code>. We only need variables <code>$1</code> and <code>$2</code> here since they contain the fasta ID line and the DNA sequence, respectively. We need to add <code>&gt;</code> before the ID line and provide newline characters <code>\n</code> between the ID and sequence lines. Please examine the print statement to get the idea of how it works and experiment by adding your own text. Any of the <em>fastq</em> files in the <a href="http://www.mothur.org/w/images/d/d6/MiSeqSOPData.zip">example data set</a> can be used for experimenting.</p>
+
+<p>Awk is an extremely versatile and powerful tool and I have only scratched the surface of its uses here. I will cover more examples in future posts - if you&rsquo;re feeling curious in the meantime, check my <a href="/oneliners/">Unix tricks</a> page!</p>
+
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://manutamminen.github.io/posts/process_subst/" data-toggle="tooltip" data-placement="top" title="Pipes, process substitution and why should a biologist ever care">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://manutamminen.github.io/posts/kokeilu/" data-toggle="tooltip" data-placement="top" title="Kokeilu">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/manutamminen" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/mavata" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/manu-tamminen-4887624" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="https://manutamminen.info">Manu Tamminen</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://manutamminen.github.io">Manu Tamminen</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.37.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://manutamminen.github.io/js/main.js"></script>
+<script src="https://manutamminen.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script>
+<script src="https://manutamminen.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+
