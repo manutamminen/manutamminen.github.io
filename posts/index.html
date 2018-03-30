@@ -185,7 +185,7 @@
               </p>
               <div class="post-entry">
                 
-                  I use these Unix one-liners and such all the time in my bioinformatic work. I hope you&rsquo;ll find then useful as well!
+                  I use these Unix one-liners and such all the time in my bioinformatic work. I hope you&rsquo;ll find then useful as well! 
 Reverse complement all sequences in a fasta file.
 paste -d &#34;\n&#34; \  &lt;(grep &#34;&gt;&#34; sequences.fasta) \  &lt;(grep -v &#34;&gt;&#34; sequences.fasta | tr ATGC TACG | rev) \  &gt; reverse_complemented_sequences.fasta 
 

@@ -16,7 +16,7 @@
       <pubDate>Fri, 30 Mar 2018 13:00:43 +0300</pubDate>
       
       <guid>https://manutamminen.github.io/posts/unix_tricks/</guid>
-      <description>I use these Unix one-liners and such all the time in my bioinformatic work. I hope you&amp;rsquo;ll find then useful as well!
+      <description>I use these Unix one-liners and such all the time in my bioinformatic work. I hope you&amp;rsquo;ll find then useful as well! 
 Reverse complement all sequences in a fasta file.
 paste -d &amp;#34;\n&amp;#34; \  &amp;lt;(grep &amp;#34;&amp;gt;&amp;#34; sequences.fasta) \  &amp;lt;(grep -v &amp;#34;&amp;gt;&amp;#34; sequences.fasta | tr ATGC TACG | rev) \  &amp;gt; reverse_complemented_sequences.fasta 
 
