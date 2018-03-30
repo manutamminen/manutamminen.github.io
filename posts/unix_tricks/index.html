@@ -226,7 +226,7 @@ paste -d &#34;\n&#34; \ …">
     &lt;<span class="o">(</span>grep -v <span class="s2">&#34;&gt;&#34;</span> sequences.fasta <span class="p">|</span> cut -c25- <span class="p">|</span> rev <span class="p">|</span> cut -c21- <span class="p">|</span> rev<span class="o">)</span></code></pre></div>
 <p><br></br></p>
 
-<p>Remove line breaks in a fasta file. Credit goes to [[<a href="https://stackoverflow.com/questions/15857088/remove-line-breaks-in-a-fasta-file][this">https://stackoverflow.com/questions/15857088/remove-line-breaks-in-a-fasta-file][this</a> thread]].</p>
+<p>Remove line breaks in a fasta file. Credit goes to <a href="https://stackoverflow.com/questions/15857088/remove-line-breaks-in-a-fasta-file" target="_blank">this thread</a>.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">awk <span class="s1">&#39;/^&gt;/ {print s ? s &#34;\n&#34; $0 : $0; s=&#34;&#34;; next} \
 </span><span class="s1">          {s=s sprintf(&#34;%s&#34;, $0)} END {if (s) print s}&#39;</span> <span class="se">\
 </span><span class="se"></span>    sequences.fasta &gt; sequences_with_no_line_breaks.fasta</code></pre></div>
@@ -241,7 +241,7 @@ paste -d &#34;\n&#34; \ …">
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">awk <span class="s1">&#39;$0 = &#34;&gt;&#34; NR &#34;\n&#34; $0&#39;</span> sequences.seq &gt; sequences.fasta</code></pre></div>
 <p><br></br></p>
 
-<p>Quality-trim a bunch of fastq files. Depends on [[<a href="http://hannonlab.cshl.edu/fastx_toolkit/][FASTX-Toolkit]">http://hannonlab.cshl.edu/fastx_toolkit/][FASTX-Toolkit]</a>].</p>
+<p>Quality-trim a bunch of fastq files. Depends on <a href="http://hannonlab.cshl.edu/fastx_toolkit/" target="_blank">FASTX-Toolkit</a>.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">ls *.fastq <span class="p">|</span> <span class="k">while</span> <span class="nb">read</span> file<span class="p">;</span> <span class="se">\
 </span><span class="se"></span>    <span class="k">do</span> <span class="nb">echo</span> <span class="nv">$file</span><span class="p">;</span> fastx_clipper -Q <span class="m">33</span> -i <span class="nv">$file</span> -o <span class="si">${</span><span class="nv">file</span><span class="si">}</span>_trimmed<span class="p">;</span> <span class="k">done</span></code></pre></div>
 <p><br></br></p>
