@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Manu Tamminen</title>
-    <link>https://manutamminen.info/posts/</link>
+    <link>https://manutamminen.github.io/posts/</link>
     <description>Recent content in Posts on Manu Tamminen</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Fri, 30 Mar 2018 13:00:43 +0300</lastBuildDate>
     
-	<atom:link href="https://manutamminen.info/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://manutamminen.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Unix tricks for bioinformagicians</title>
-      <link>https://manutamminen.info/posts/unix_tricks/</link>
+      <link>https://manutamminen.github.io/posts/unix_tricks/</link>
       <pubDate>Fri, 30 Mar 2018 13:00:43 +0300</pubDate>
       
-      <guid>https://manutamminen.info/posts/unix_tricks/</guid>
+      <guid>https://manutamminen.github.io/posts/unix_tricks/</guid>
       <description>I use these Unix one-liners and such all the time in my bioinformatic work. I hope you&amp;rsquo;ll find then useful as well! 
 Reverse complement all sequences in a fasta file.
 paste -d &amp;#34;\n&amp;#34; \  &amp;lt;(grep &amp;#34;&amp;gt;&amp;#34; sequences.fasta) \  &amp;lt;(grep -v &amp;#34;&amp;gt;&amp;#34; sequences.fasta | tr ATGC TACG | rev) \  &amp;gt; reverse_complemented_sequences.fasta 
@@ -26,19 +26,19 @@ paste \  &amp;lt;(ls *R1*.fastq | awk -F&amp;#34;_&amp;#34; &amp;#39;{print $1}&
     
     <item>
       <title>Introducing Awk</title>
-      <link>https://manutamminen.info/posts/awk/</link>
+      <link>https://manutamminen.github.io/posts/awk/</link>
       <pubDate>Tue, 15 Dec 2015 12:08:24 +0300</pubDate>
       
-      <guid>https://manutamminen.info/posts/awk/</guid>
+      <guid>https://manutamminen.github.io/posts/awk/</guid>
       <description>In this entry I&amp;rsquo;m going to explain the very basics of a little programming language called Awk. The primary reason why I&amp;rsquo;m advocating the use of Awk (and not for instance Perl or Python) is that Awk is absolutely great for writing very short programs, or one-liners. In fact, in my opinion Awk should never be used for anything longer than one-liners - if your task appears to demand a longer piece of code, it will probably be wiser to choose Perl or Python instead.</description>
     </item>
     
     <item>
       <title>Pipes, process substitution and why should a biologist ever care</title>
-      <link>https://manutamminen.info/posts/process_subst/</link>
+      <link>https://manutamminen.github.io/posts/process_subst/</link>
       <pubDate>Sun, 22 Nov 2015 12:48:24 +0300</pubDate>
       
-      <guid>https://manutamminen.info/posts/process_subst/</guid>
+      <guid>https://manutamminen.github.io/posts/process_subst/</guid>
       <description>This is the first entry in my series about how to keep DNA sequence processing as simple as possible. Each entry attempts to teach a useful Unix trick or two, focusing on relevance for biologists who might not have much prior Unix experience. Because of the very clever design choices made by the folks behind Unix, every trick can be combined with everything else in ways that lead to a much greater flexibility and expressiveness than any of the tricks alone - I attempt to demonstrate that in the following posts.</description>
     </item>
     
