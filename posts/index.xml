@@ -5,10 +5,24 @@
     <link>https://manutamminen.github.io/posts/</link>
     <description>Recent content in Posts on Manu Tamminen</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 15 Dec 2015 12:08:24 +0300</lastBuildDate>
+    <lastBuildDate>Fri, 30 Mar 2018 13:00:43 +0300</lastBuildDate>
     
 	<atom:link href="https://manutamminen.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Unix_tricks</title>
+      <link>https://manutamminen.github.io/posts/unix_tricks/</link>
+      <pubDate>Fri, 30 Mar 2018 13:00:43 +0300</pubDate>
+      
+      <guid>https://manutamminen.github.io/posts/unix_tricks/</guid>
+      <description>I use these Unix one-liners and such all the time in my bioinformatic work. I hope you&amp;rsquo;ll find then useful as well!
+Reverse complement all sequences in a fasta file.
+paste -d &amp;#34;\n&amp;#34; \  &amp;lt;(grep &amp;#34;&amp;gt;&amp;#34; sequences.fasta) \  &amp;lt;(grep -v &amp;#34;&amp;gt;&amp;#34; sequences.fasta | tr ATGC TACG | rev) \  &amp;gt; reverse_complemented_sequences.fasta 
+
+Prepare a stability file from paired end reads.
+paste \  &amp;lt;(ls *R1*.fastq | awk -F&amp;#34;_&amp;#34; &amp;#39;{print $1}&amp;#39;) \  &amp;lt;(ls *R1*.</description>
+    </item>
     
     <item>
       <title>Introducing Awk</title>
