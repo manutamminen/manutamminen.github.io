@@ -223,6 +223,10 @@ paste -d &#34;\n&#34; \ …">
 </span><span class="se"></span>    &gt; stability.txt</code></pre></div>
 <p><br></br></p>
 
+<p>Compress the contents of a folder individually; separate process for each. Credit goes to <a href="https://stackoverflow.com/questions/29810186/is-there-a-one-liner-for-submitting-many-jobs-to-slurm-similar-to-lsf" target="_blank">this thread</a>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">ls <span class="p">|</span> xargs -I <span class="o">{}</span> sbatch --wrap<span class="o">=</span><span class="s2">&#34;gzip {}&#34;</span></code></pre></div>
+<p><br></br></p>
+
 <p>Convert a fastq to a fasta. Assumes that a comma can be used as a line separator.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">cat file.fastq <span class="p">|</span> paste -d, - - - - <span class="p">|</span> awk -F, <span class="s1">&#39;{print &#34;&gt;&#34; $1 &#34;\n&#34; $2 &#34;\n&#34;}&#39;</span> &gt; file.fasta</code></pre></div>
 <p><br></br></p>
