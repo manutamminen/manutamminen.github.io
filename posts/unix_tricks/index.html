@@ -223,7 +223,7 @@ paste -d &#34;\n&#34; \ …">
 </span><span class="se"></span>    &gt; stability.txt</code></pre></div>
 <p><br></br></p>
 
-<p>Compress the contents of a folder individually; separate process for each. Credit goes to <a href="https://stackoverflow.com/questions/29810186/is-there-a-one-liner-for-submitting-many-jobs-to-slurm-similar-to-lsf" target="_blank">this thread</a>.</p>
+<p>Compress the contents of a folder individually; separate process for each. Uses SLURM. Credit goes to <a href="https://stackoverflow.com/questions/29810186/is-there-a-one-liner-for-submitting-many-jobs-to-slurm-similar-to-lsf" target="_blank">this thread</a>.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">ls <span class="p">|</span> xargs -I <span class="o">{}</span> sbatch --wrap<span class="o">=</span><span class="s2">&#34;gzip {}&#34;</span></code></pre></div>
 <p><br></br></p>
 
