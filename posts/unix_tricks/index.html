@@ -10,13 +10,11 @@
   <meta name="twitter:title" content="Unix tricks for bioinformagicians" />
   <meta name="description" content="I use these Unix one-liners and such all the time in my bioinformatic work. I hope you&rsquo;ll find then useful as well! 
 Reverse complement all sequences in a fasta file.
-paste -d &#34;\n&#34; \  &lt;(grep &#34;&gt;&#34; sequences.fasta) \  &lt;(grep -v &#34;&gt;&#34; sequences.fasta | tr ATGC TACG | rev) \  &gt; reverse_complemented_sequences.fasta 
-Prepare a stability file from paired end reads.
+paste -d &#34;\n&#34; \  &lt;(grep &#34;&gt;&#34; sequences.fasta) \  &lt;(grep -v &#34;&gt;&#34; sequences.fasta | tr ATGC TACG | rev) \  &gt; reverse_complemented_sequences.fasta Prepare a stability file from paired end reads.
 paste \  &lt;(ls *R1*.fastq | awk -F&#34;_&#34; &#39;{print $1}&#39;) \  &lt;(ls *R1*.">
   <meta property="og:description" content="I use these Unix one-liners and such all the time in my bioinformatic work. I hope you&rsquo;ll find then useful as well! 
 Reverse complement all sequences in a fasta file.
-paste -d &#34;\n&#34; \  &lt;(grep &#34;&gt;&#34; sequences.fasta) \  &lt;(grep -v &#34;&gt;&#34; sequences.fasta | tr ATGC TACG | rev) \  &gt; reverse_complemented_sequences.fasta 
-Prepare a stability file from paired end reads.
+paste -d &#34;\n&#34; \  &lt;(grep &#34;&gt;&#34; sequences.fasta) \  &lt;(grep -v &#34;&gt;&#34; sequences.fasta | tr ATGC TACG | rev) \  &gt; reverse_complemented_sequences.fasta Prepare a stability file from paired end reads.
 paste \  &lt;(ls *R1*.fastq | awk -F&#34;_&#34; &#39;{print $1}&#39;) \  &lt;(ls *R1*.">
   <meta name="twitter:description" content="I use these Unix one-liners and such all the time in my bioinformatic work. I hope you&rsquo;ll find then useful as well! 
 Reverse complement all sequences in a fasta file.
@@ -211,61 +209,39 @@ paste -d &#34;\n&#34; \ …">
 </span><span class="se"></span>    &lt;<span class="o">(</span>grep <span class="s2">&#34;&gt;&#34;</span> sequences.fasta<span class="o">)</span> <span class="se">\
 </span><span class="se"></span>    &lt;<span class="o">(</span>grep -v <span class="s2">&#34;&gt;&#34;</span> sequences.fasta <span class="p">|</span> tr ATGC TACG <span class="p">|</span> rev<span class="o">)</span> <span class="se">\
 </span><span class="se"></span>    &gt; reverse_complemented_sequences.fasta</code></pre></div>
-<p></br></p>
-
 <p>Prepare a stability file from paired end reads.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">paste <span class="se">\
 </span><span class="se"></span>    &lt;<span class="o">(</span>ls *R1*.fastq <span class="p">|</span> awk -F<span class="s2">&#34;_&#34;</span> <span class="s1">&#39;{print $1}&#39;</span><span class="o">)</span> <span class="se">\
 </span><span class="se"></span>    &lt;<span class="o">(</span>ls *R1*.fastq<span class="o">)</span><span class="se">\
 </span><span class="se"></span>    &lt;<span class="o">(</span>ls *R2*.fastq<span class="o">)</span><span class="se">\
 </span><span class="se"></span>    &gt; stability.txt</code></pre></div>
-<p></br></p>
-
 <p>Compress the contents of a folder individually; separate process for each. Uses SLURM. Credit goes to <a href="https://stackoverflow.com/questions/29810186/is-there-a-one-liner-for-submitting-many-jobs-to-slurm-similar-to-lsf" target="_blank">this thread</a>.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">ls <span class="p">|</span> xargs -I <span class="o">{}</span> sbatch --wrap<span class="o">=</span><span class="s2">&#34;gzip {}&#34;</span></code></pre></div>
-<p></br></p>
-
 <p>Convert a fastq to a fasta. Assumes that a comma can be used as a line separator.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">cat file.fastq <span class="p">|</span> paste -d, - - - - <span class="p">|</span> awk -F, <span class="s1">&#39;{print &#34;&gt;&#34; $1 &#34;\n&#34; $2 &#34;\n&#34;}&#39;</span> &gt; file.fasta</code></pre></div>
-<p></br></p>
-
 <p>Trim first 24 and last 20 bases from each sequence in a fasta file.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">paste -d <span class="s2">&#34;\n&#34;</span> <span class="se">\
 </span><span class="se"></span>    &lt;<span class="o">(</span>grep <span class="s2">&#34;&gt;&#34;</span> sequences.fasta<span class="o">)</span>
     &lt;<span class="o">(</span>grep -v <span class="s2">&#34;&gt;&#34;</span> sequences.fasta <span class="p">|</span> cut -c25- <span class="p">|</span> rev <span class="p">|</span> cut -c21- <span class="p">|</span> rev<span class="o">)</span></code></pre></div>
-<p></br></p>
-
 <p>Remove line breaks in a fasta file. Credit goes to <a href="https://stackoverflow.com/questions/15857088/remove-line-breaks-in-a-fasta-file" target="_blank">this thread</a>.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">awk <span class="s1">&#39;/^&gt;/ {print s ? s &#34;\n&#34; $0 : $0; s=&#34;&#34;; next} \
 </span><span class="s1">          {s=s sprintf(&#34;%s&#34;, $0)} END {if (s) print s}&#39;</span> <span class="se">\
 </span><span class="se"></span>    sequences.fasta &gt; sequences_with_no_line_breaks.fasta</code></pre></div>
-<p></br></p>
-
 <p>Create size bins (intervals of 10 bases) of a fasta file.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">cat file.fasta <span class="p">|</span> paste -d, - - <span class="p">|</span> <span class="se">\
 </span><span class="se"></span>    awk -F, <span class="s1">&#39;{f = int(length($2)/10)*10 &#34;.fas&#34;; print $1 &#34;\n&#34; $2 &gt; f}&#39;</span></code></pre></div>
-<p></br></p>
-
 <p>Make an indexed fasta from a list of sequences.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">awk <span class="s1">&#39;$0 = &#34;&gt;&#34; NR &#34;\n&#34; $0&#39;</span> sequences.seq &gt; sequences.fasta</code></pre></div>
-<p></br></p>
-
 <p>Quality-trim a bunch of fastq files. Depends on <a href="http://hannonlab.cshl.edu/fastx_toolkit/" target="_blank">FASTX-Toolkit</a>.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">ls *.fastq <span class="p">|</span> <span class="k">while</span> <span class="nb">read</span> file<span class="p">;</span> <span class="se">\
 </span><span class="se"></span>    <span class="k">do</span> <span class="nb">echo</span> <span class="nv">$file</span><span class="p">;</span> fastx_clipper -Q <span class="m">33</span> -i <span class="nv">$file</span> -o <span class="si">${</span><span class="nv">file</span><span class="si">}</span>_trimmed<span class="p">;</span> <span class="k">done</span></code></pre></div>
-<p></br></p>
-
 <p>Intersperse paired end reads from two fastq files into a single fastq file.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">paste -d <span class="s2">&#34;\n&#34;</span> <span class="se">\
 </span><span class="se"></span>    &lt;<span class="o">(</span>cat reads1.fastq <span class="p">|</span> paste -d% - - - -<span class="o">)</span> <span class="se">\
 </span><span class="se"></span>    &lt;<span class="o">(</span>cat reads2.fastq <span class="p">|</span> paste -d% - - - -<span class="o">)</span> <span class="p">|</span> tr <span class="s1">&#39;%&#39;</span> <span class="s1">&#39;\n&#39;</span> <span class="se">\
 </span><span class="se"></span> &gt; joined_reads.fastq</code></pre></div>
-<p></br></p>
-
 <p>Calculate the number of entries in a fasta file.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">grep -c <span class="s2">&#34;&gt;&#34;</span> file.fasta</code></pre></div>
-<p></br></p>
-
 <p>Calculate the length distribution (bin size 1000) of sequences in a fasta file.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">awk <span class="s1">&#39;/^&gt;/ {if (len != 0) print int(len/1000)*1000+1000; \
 </span><span class="s1">    len = 0; next} {len += length($0)}&#39;</span> sequences.fasta <span class="p">|</span> <span class="se">\
@@ -333,7 +309,7 @@ paste -d &#34;\n&#34; \ …">
           
 
           &nbsp;&bull;&nbsp;
-          2018
+          2019
 
           
             &nbsp;&bull;&nbsp;

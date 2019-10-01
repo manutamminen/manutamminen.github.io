@@ -193,8 +193,7 @@
                 
                   I use these Unix one-liners and such all the time in my bioinformatic work. I hope you&rsquo;ll find then useful as well! 
 Reverse complement all sequences in a fasta file.
-paste -d &#34;\n&#34; \  &lt;(grep &#34;&gt;&#34; sequences.fasta) \  &lt;(grep -v &#34;&gt;&#34; sequences.fasta | tr ATGC TACG | rev) \  &gt; reverse_complemented_sequences.fasta 
-Prepare a stability file from paired end reads.
+paste -d &#34;\n&#34; \  &lt;(grep &#34;&gt;&#34; sequences.fasta) \  &lt;(grep -v &#34;&gt;&#34; sequences.fasta | tr ATGC TACG | rev) \  &gt; reverse_complemented_sequences.fasta Prepare a stability file from paired end reads.
 paste \  &lt;(ls *R1*.fastq | awk -F&#34;_&#34; &#39;{print $1}&#39;) \  &lt;(ls *R1*.
                   <a href="https://manutamminen.github.io/posts/unix_tricks/" class="post-read-more">[Read More]</a>
                 
@@ -292,7 +291,7 @@ paste \  &lt;(ls *R1*.fastq | awk -F&#34;_&#34; &#39;{print $1}&#39;) \  &lt;(ls
           
 
           &nbsp;&bull;&nbsp;
-          2018
+          2019
 
           
             &nbsp;&bull;&nbsp;
