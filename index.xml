@@ -1,23 +1,18 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Manu Tamminen</title>
     <link>https://manutamminen.github.io/</link>
     <description>Recent content on Manu Tamminen</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 30 Mar 2018 13:00:43 +0300</lastBuildDate>
-    
-	<atom:link href="https://manutamminen.github.io/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 30 Mar 2018 13:00:43 +0300</lastBuildDate><atom:link href="https://manutamminen.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Unix tricks for bioinformagicians</title>
       <link>https://manutamminen.github.io/posts/unix_tricks/</link>
       <pubDate>Fri, 30 Mar 2018 13:00:43 +0300</pubDate>
       
       <guid>https://manutamminen.github.io/posts/unix_tricks/</guid>
-      <description>I use these Unix one-liners and such all the time in my bioinformatic work. I hope you&amp;rsquo;ll find then useful as well! 
-Reverse complement all sequences in a fasta file.
+      <description>I use these Unix one-liners and such all the time in my bioinformatic work. I hope you&amp;rsquo;ll find then useful as well! Reverse complement all sequences in a fasta file.
 paste -d &amp;#34;\n&amp;#34; \  &amp;lt;(grep &amp;#34;&amp;gt;&amp;#34; sequences.fasta) \  &amp;lt;(grep -v &amp;#34;&amp;gt;&amp;#34; sequences.fasta | tr ATGC TACG | rev) \  &amp;gt; reverse_complemented_sequences.fasta Prepare a stability file from paired end reads.
 paste \  &amp;lt;(ls *R1*.fastq | awk -F&amp;#34;_&amp;#34; &amp;#39;{print $1}&amp;#39;) \  &amp;lt;(ls *R1*.</description>
     </item>
@@ -55,9 +50,8 @@ paste \  &amp;lt;(ls *R1*.fastq | awk -F&amp;#34;_&amp;#34; &amp;#39;{print $1}&
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://manutamminen.github.io/contact/</guid>
-      <description> Contact me  
- Alternatively, for snail-mail or visiting, use
-Manu Tamminen Department of Biology University Hill 20014 University of Turku Finland</description>
+      <description>Contact me Alternatively, for snail-mail or visiting, use
+Manu Tamminen Department of Biology University Hill 20014 University of Turku Finland </description>
     </item>
     
     <item>
@@ -66,19 +60,19 @@ Manu Tamminen Department of Biology University Hill 20014 University of Turku Fi
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://manutamminen.github.io/media/</guid>
-      <description>In media genomeweb 31.1.2020.
-Nature Ecology and Evolution Community 7.11.2018.
-Turun sanomat 7.5.2018. In Finnish.
-Tiedepolitiikka 31.12.2017. In Finnish.
-Turun sanomat 20.11.2017. In Finnish.
-genomeweb 30.9.2015.
-Uutistamo 19.2.2015. In Finnish.
-Kemian teollisuus 21.1.2015.
-Helsingin sanomat 5.8.2014. In Finnish.
-Kansan uutiset 15.4.2011. In Finnish.
-Turun sanomat 14.4.2011. In Finnish.
-Talouselämä 13.4.2011. In Finnish.
-Turun sanomat 28.4.2004. In Finnish.</description>
+      <description>In media genomeweb31.1.2020.
+Nature Ecology and Evolution Community7.11.2018.
+Turun sanomat7.5.2018. In Finnish.
+Tiedepolitiikka31.12.2017. In Finnish.
+Turun sanomat20.11.2017. In Finnish.
+genomeweb30.9.2015.
+Uutistamo19.2.2015. In Finnish.
+Kemian teollisuus21.1.2015.
+Helsingin sanomat5.8.2014. In Finnish.
+Kansan uutiset15.4.2011. In Finnish.
+Turun sanomat14.4.2011. In Finnish.
+Talouselämä13.4.2011. In Finnish.
+Turun sanomat28.4.2004. In Finnish.</description>
     </item>
     
     <item>
@@ -87,9 +81,11 @@ Turun sanomat 28.4.2004. In Finnish.</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://manutamminen.github.io/projects/</guid>
-      <description>Software epride - easy primer design for complex sequence alignments
-My Emacs configuration
-Web projects The life and works of J.S.Bach</description>
+      <description>Software Blaster - BLAST-like sequence comparison algorithm for R [github] [CRAN]
+Prider - primer designer for multiple sequence alignments implemented in R [github]
+Seqmerger - Fastq sequence merger and quality filter for R [github]
+My Emacs configuration [github]
+Web projects The life and works of J.S.Bach [site]</description>
     </item>
     
     <item>
@@ -98,12 +94,12 @@ Web projects The life and works of J.S.Bach</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://manutamminen.github.io/publications/</guid>
-      <description>Publications In preparation
-Tamminen M., Schmid S., Schiff H., Spaak J., Caduff L., Julian T. prider. A local alignment-based clustering and primer design tool for complex sequence pools.
-Submitted
-Tamminen, M., Spaak, J., Tlili, A., Eggen, R., Stamm, C. and Räsänen, K. Context dependency of biofilm community diversity in wastewater impacted streams: insight from next generation sequencing.
-2020
-Tamminen M., Spaak J., Caduff L., Schiff H., Montealegre M., Lang, R.</description>
+      <description>Publications  In preparation
+ Tamminen M., Schmid S., Schiff H., Spaak J., Caduff L., Julian T. prider. A local alignment-based clustering and primer design tool for complex sequence pools.
+ Submitted
+ Tamminen, M., Spaak, J., Tlili, A., Eggen, R., Stamm, C. and Räsänen, K. Context dependency of biofilm community diversity in wastewater impacted streams: insight from next generation sequencing.
+ 2020
+ Tamminen M., Spaak J., Caduff L., Schiff H.</description>
     </item>
     
     <item>
@@ -113,16 +109,7 @@ Tamminen M., Spaak J., Caduff L., Schiff H., Montealegre M., Lang, R.</descripti
       
       <guid>https://manutamminen.github.io/research/</guid>
       <description>Research I am applying high throughput genomic tools to understand biological phenomena on microscopic scale. The questions include&amp;hellip;
-Functional structuring of microbial communities  &amp;ldquo;Who is doing what&amp;rdquo; is a lingering question in microbial ecology. The vast amount and diversity of microbial cells in any environment makes genomic screening efforts extremely challenging. For instance, performing millions of PCR reactions to determine the genomic properties of every cell in any microbial system is simply unfeasible using any traditional techniques.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://manutamminen.github.io/welcome/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://manutamminen.github.io/welcome/</guid>
-      <description>I am a molecular biologist specialising in genomics and transcriptomics of single cells and microscopic cell communities. My research directions include...  Determining &#34;who is doing what&#34; in very complex microbial communities. My current focus is on genes for elemental cycles and antibiotic resistance. The research builds on our recently published epicPCR methodology. The figure is adapted from Spencer, Tamminen et al (2016), released under CC BY 4.0. Read more here.</description>
+ Functional structuring of microbial communities &amp;ldquo;Who is doing what&amp;rdquo; is a lingering question in microbial ecology. The vast amount and diversity of microbial cells in any environment makes genomic screening efforts extremely challenging. For instance, performing millions of PCR reactions to determine the genomic properties of every cell in any microbial system is simply unfeasible using any traditional techniques.</description>
     </item>
     
     <item>
@@ -132,7 +119,7 @@ Functional structuring of microbial communities  &amp;ldquo;Who is doing what&am
       
       <guid>https://manutamminen.github.io/welcome/</guid>
       <description>I am a molecular biologist specialising in genomics and transcriptomics of single cells and microscopic cell communities. My research directions include...
-{.wp-image-274 .alignleft width=&amp;ldquo;152&amp;rdquo; height=&amp;ldquo;152&amp;rdquo;} Determining \&amp;ldquo;who is doing what\&amp;rdquo; in very complex microbial communities. My current focus is on genes for elemental cycles and antibiotic resistance. The research builds on our recently published epicPCR methodology. The figure is adapted from Spencer, Tamminen et al (2016), released under CC BY 4.</description>
+ {.wp-image-274 .alignleft width=&amp;ldquo;152&amp;rdquo; height=&amp;ldquo;152&amp;rdquo;} Determining &amp;quot;who is doing what&amp;quot; in very complex microbial communities. My current focus is on genes for elemental cycles and antibiotic resistance. The research builds on our recently published epicPCR methodology. The figure is adapted from Spencer, Tamminen et al (2016), released under CC BY 4.</description>
     </item>
     
   </channel>

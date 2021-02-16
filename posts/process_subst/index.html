@@ -21,7 +21,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Manu Tamminen" />
 
-  <meta name="generator" content="Hugo 0.53" />
+  <meta name="generator" content="Hugo 0.80.0" />
   <link rel="canonical" href="https://manutamminen.github.io/posts/process_subst/" />
   <link rel="alternate" href="https://manutamminen.github.io/index.xml" type="application/rss+xml" title="Manu Tamminen">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -193,101 +193,81 @@
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        
-
-<p>This is the first entry in my series about how to keep DNA sequence processing as simple as possible. Each entry attempts to teach a useful Unix trick or two, focusing on relevance for biologists who might not have much prior Unix experience. Because of the <a href="http://en.wikipedia.org/wiki/Unix_philosophy">very clever design choices made by the folks behind Unix,</a> every trick can be combined with everything else in ways that lead to a much greater flexibility and expressiveness than any of the tricks alone - I attempt to demonstrate that in the following posts. These tricks work on Bash and Zsh, so be sure that your Unix profile is running one of them. <sup class="footnote-ref" id="fnref:shell"><a href="#fn:shell">1</a></sup></p>
-
+        <p>This is the first entry in my series about how to keep DNA sequence processing as simple as possible. Each entry attempts to teach a useful Unix trick or two, focusing on relevance for biologists who might not have much prior Unix experience. Because of the <a href="http://en.wikipedia.org/wiki/Unix_philosophy">very clever design choices made by the folks behind Unix,</a> every trick can be combined with everything else in ways that lead to a much greater flexibility and expressiveness than any of the tricks alone - I attempt to demonstrate that in the following posts. These tricks work on Bash and Zsh, so be sure that your Unix profile is running one of them. <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
 <p>A lot of the computational work that a modern genetically inclined biologist has to do is actually just converting data between incompatible formats and other trivial processing tasks - think converting <em>fastq</em> to <em>fasta</em>, trimming off adapter sequences, removing problematic characters from <em>fasta</em> ids etc&hellip; A lot of labs have their stash of Perl and Python scribbles to handle these tasks and certainly these scripts do their thing. However, I personally prefer doing as much of this as possible using just the plain Unix command line and avoid writing scripts if possible. The brevity of expression that Unix command line provides for simple text and sequence processing tasks is about unparalleled. Plus the commands are available on any Unix system, right out of the box.</p>
-
-<h2 id="what-s-the-deal-with-pipes">What&rsquo;s the deal with pipes?</h2>
-
+<h2 id="whats-the-deal-with-pipes">What&rsquo;s the deal with pipes?</h2>
 <p>Unix command line and standard tools were not designed for DNA sequence processing but nevertheless <a href="https://github.com/stephenturner/oneliners">do that really well</a>. The basic Unix commands form a vocabulary of simple text and sequence processing operations and this vocabulary can be combined into sentences using Unix pipes. For a better introduction for pipes than I can provide here, <a href="https://www.youtube.com/watch?v=9gSPo-9mLOs">this video tutorial</a> will get you started. Piping is an easy but powerful concept and definitely worth learning. Here are three common commands in the Unix text and sequence processing vocabulary:</p>
-
 <ul>
 <li><strong>cat</strong> prints contents of a file on screen or sends them down a pipe</li>
 <li><strong>rev</strong> reverses any line of text</li>
 <li><strong>tr</strong> replaces a set of characters with a different set of characters</li>
 </ul>
-
 <p>Let&rsquo;s put some of these into practice. A simple example would be taking reverse-complements of DNA sequences in file <em>sequences.txt</em> (which you can download <a href="https://raw.githubusercontent.com/manutamminen/teaching_materials/master/sequences.txt">here</a>):</p>
-
 <p>sequences.txt</p>
-
 <p><div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>AAGTGTCGTA 
 <span class="ln">2</span>GGTCGCAAATG
 <span class="ln">3</span>GAAGTGCCTAG 
 <span class="ln">4</span>TGAAGATGC</code></pre></div>
 A very simple command pipeline to do the
 task would be</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">cat sequences.txt <span class="p">|</span> rev <span class="p">|</span> tr AGCT TCGA</code></pre></div>
-<p>This crunches through the file <em>sequences.txt</em>, first
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">cat sequences.txt <span class="p">|</span> rev <span class="p">|</span> tr AGCT TCGA
+</code></pre></div><p>This crunches through the file <em>sequences.txt</em>, first
 reversing each sequence and then converting each into a respective
 complement, line by line. The output is - not surprisingly - a
 reverse-complement of each sequence:</p>
-
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>TACGACACTT
 <span class="ln">2</span>CATTTGCGACC
 <span class="ln">3</span>CTAGGCACTTC
 <span class="ln">4</span>GCATCTTCA</code></pre></div>
-
-<p>A trick I use all the time is a minor variant of this: during primer design I reverse-complement sequences a lot and want to do that with a minimal typing effort. In that case I won&rsquo;t even bother to create a file; rather I just send a text string to <strong>rev</strong> and <strong>tr</strong> using command <strong>echo</strong> and the following pipeline. <sup class="footnote-ref" id="fnref:alias"><a href="#fn:alias">2</a></sup></p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> TGGTAGTGTAACGCCTACA <span class="p">|</span> rev <span class="p">|</span> tr AGCT TCGA</code></pre></div>
-<p>Pipes can be used to join pretty much any Unix commands together. After all my years with Unix, I&rsquo;m still discovering new useful ways of piping stuff together.</p>
-
+<p>A trick I use all the time is a minor variant of this: during primer design I reverse-complement sequences a lot and want to do that with a minimal typing effort. In that case I won&rsquo;t even bother to create a file; rather I just send a text string to <strong>rev</strong> and <strong>tr</strong> using command <strong>echo</strong> and the following pipeline. <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> TGGTAGTGTAACGCCTACA <span class="p">|</span> rev <span class="p">|</span> tr AGCT TCGA
+</code></pre></div><p>Pipes can be used to join pretty much any Unix commands together. After all my years with Unix, I&rsquo;m still discovering new useful ways of piping stuff together.</p>
 <h2 id="when-are-pipes-not-enough">When are pipes not enough?</h2>
-
 <p>Pipes are great but not always enough. A good example is a more realistic case of reverse-complementing sequences: in real world DNA sequences are typically not provided as simple lists. Rather, a typical format would be <em>fasta</em> where the sequence ids are interspersed by the DNA sequences, as shown in the example below:</p>
-
 <p>example.fasta</p>
-
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>&gt;Sequence_id_1 
 <span class="ln">2</span>AATTGATAGGTCCGTT
 <span class="ln">3</span>&gt;Sequence_id_2
 <span class="ln">4</span>TTGTCGTTATATGGTTAC
 <span class="ln">5</span>&gt;Sequence_id_3
 <span class="ln">6</span>GTTGAGTCGTGGTCGT</code></pre></div>
-
 <p>With the kind of command pipeline we used above, the sequence ids would also get reversed and their letter As translated into Ts etc&hellip; How could we get around this? I first read about process substitution in this <a href="http://www.vincebuffalo.com/2013/08/08/the-mighty-named-pipe.html">excellent blog entry</a>. Don&rsquo;t be put off by a scary name - the concept is about as simple as Unix pipes and about as useful. Where piping directs the output of one command to the input of next one, process substitution directs outputs of multiple commands to the input of next one. The figure below attempts to illuminate the concepts and their difference.</p>
-
-<p><img src="/img/mockup.png" alt="mockup" /></p>
-
+<p><img src="/img/mockup.png" alt="mockup"></p>
 <p>Let me demonstrate this using an example. To reverse-complement every sequence in a multiple <em>fasta</em> file and leave the sequence ids untouched, one has to separate the id and sequence parts. For this we also have to introduce two new words into our text processing vocabulary:</p>
-
 <ul>
 <li><strong>paste</strong> joins together two lines of text</li>
 <li><strong>grep</strong> finds lines containing (or excluding) a particular text string or character</li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">paste -d <span class="s2">&#34;\n&#34;</span> &lt;<span class="o">(</span>grep <span class="s2">&#34;&gt;&#34;</span> sequence.fasta<span class="o">)</span> &lt;<span class="o">(</span>grep -v <span class="s2">&#34;&gt;&#34;</span> sequence.fasta <span class="p">|</span> rev <span class="p">|</span> tr ATCG TAGC<span class="o">)</span></code></pre></div>
-<p>That&rsquo;s it<sup class="footnote-ref" id="fnref:fasta"><a href="#fn:fasta">3</a></sup> - one line of text and quite readable if you get used to the process substitution notation. Let&rsquo;s open this up a little: after the <strong>paste</strong> command there are two text strings enclosed inside a <code>&lt;( ... )</code> -structure. This structure is used to create a stream of text. Since we&rsquo;re having two of those structures after <strong>paste</strong>, we&rsquo;re directing two separate text streams to the paste command. <strong>Paste</strong> takes these text streams and intersperses their lines. The first text stream is the fasta headers - no processing is taking place for those.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">grep <span class="s2">&#34;&gt;&#34;</span> sequence.fasta</code></pre></div>
-<p>The second text stream is the sequence parts of the fasta file (filtered by <strong>grep</strong> using the <code>-v</code> switch) that are, before streaming out to <strong>paste</strong>, streamed through <strong>rev</strong> and <strong>tr</strong> to take a reverse-complement of each sequence.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">grep -v <span class="s2">&#34;&gt;&#34;</span> sequence.fasta <span class="p">|</span> rev <span class="p">|</span> tr AGCT TCGA</code></pre></div>
-<p>The <code>-d &quot;\n&quot;</code> switch instructs <strong>paste</strong> to use a newline character as a separator for the text streams. See for yourself what happens if you leave that out! The output of our command pipeline currently gets printed on screen where we can inspect it and see that it&rsquo;s good. However, we typically want to save the output on disk for subsequent use. There&rsquo;s a very easy way to redirect the text output from screen to a file - that is the redirection operator <code>&gt;</code>. Just append your command pipeline with character <code>&gt;</code> and the file name, and there you have it. The example below saves the reverse-complemented sequences into a new file called <em>reverse_complemented_sequences.fasta</em>.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">paste -d <span class="s2">&#34;\n&#34;</span> &lt;<span class="o">(</span>grep <span class="s2">&#34;&gt;&#34;</span> sequence.fasta<span class="o">)</span> &lt;<span class="o">(</span>grep -v <span class="s2">&#34;&gt;&#34;</span> sequence.fasta <span class="p">|</span> rev <span class="p">|</span> tr ATCG TAGC<span class="o">)</span> &gt; reverse_complemented_sequences.fasta</code></pre></div>
-<p>In this example we only
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">paste -d <span class="s2">&#34;\n&#34;</span> &lt;<span class="o">(</span>grep <span class="s2">&#34;&gt;&#34;</span> sequence.fasta<span class="o">)</span> &lt;<span class="o">(</span>grep -v <span class="s2">&#34;&gt;&#34;</span> sequence.fasta <span class="p">|</span> rev <span class="p">|</span> tr ATCG TAGC<span class="o">)</span>
+</code></pre></div><p>That&rsquo;s it<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> - one line of text and quite readable if you get used to the process substitution notation. Let&rsquo;s open this up a little: after the <strong>paste</strong> command there are two text strings enclosed inside a <code>&lt;( ... )</code> -structure. This structure is used to create a stream of text. Since we&rsquo;re having two of those structures after <strong>paste</strong>, we&rsquo;re directing two separate text streams to the paste command. <strong>Paste</strong> takes these text streams and intersperses their lines. The first text stream is the fasta headers - no processing is taking place for those.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">grep <span class="s2">&#34;&gt;&#34;</span> sequence.fasta
+</code></pre></div><p>The second text stream is the sequence parts of the fasta file (filtered by <strong>grep</strong> using the <code>-v</code> switch) that are, before streaming out to <strong>paste</strong>, streamed through <strong>rev</strong> and <strong>tr</strong> to take a reverse-complement of each sequence.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">grep -v <span class="s2">&#34;&gt;&#34;</span> sequence.fasta <span class="p">|</span> rev <span class="p">|</span> tr AGCT TCGA
+</code></pre></div><p>The <code>-d &quot;\n&quot;</code> switch instructs <strong>paste</strong> to use a newline character as a separator for the text streams. See for yourself what happens if you leave that out! The output of our command pipeline currently gets printed on screen where we can inspect it and see that it&rsquo;s good. However, we typically want to save the output on disk for subsequent use. There&rsquo;s a very easy way to redirect the text output from screen to a file - that is the redirection operator <code>&gt;</code>. Just append your command pipeline with character <code>&gt;</code> and the file name, and there you have it. The example below saves the reverse-complemented sequences into a new file called <em>reverse_complemented_sequences.fasta</em>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">paste -d <span class="s2">&#34;\n&#34;</span> &lt;<span class="o">(</span>grep <span class="s2">&#34;&gt;&#34;</span> sequence.fasta<span class="o">)</span> &lt;<span class="o">(</span>grep -v <span class="s2">&#34;&gt;&#34;</span> sequence.fasta <span class="p">|</span> rev <span class="p">|</span> tr ATCG TAGC<span class="o">)</span> &gt; reverse_complemented_sequences.fasta
+</code></pre></div><p>In this example we only
 modified the sequence part by taking a reverse-complement. Basically one
 could do many other modifications to both the sequence and id parts, or
 convert the file into some entirely different format. There are other
 standard Unix tools that provide more neat text manipulation tricks and
 what I find especially useful is a little programming language called
 Awk. But that&rsquo;s another story!</p>
-
-<hr />
-<div class="footnotes">
-
-<hr />
-
+<hr>
+<section class="footnotes" role="doc-endnotes">
+<hr>
 <ol>
-<li id="fn:shell">If you&rsquo;re not sure which shell you&rsquo;re running, just run <code>chsh -s /bin/bash</code> on your prompt. That will enable bash for you. You don&rsquo;t have to worry too much about what this means - Bash is a good general choice for a lot of purposes.
- <a class="footnote-return" href="#fnref:shell"><sup>[return]</sup></a></li>
-<li id="fn:alias">Writing this out every single time is actually not lazy enough for me - I will cover lazy stuff like aliases and text editor tricks in future posts.
- <a class="footnote-return" href="#fnref:alias"><sup>[return]</sup></a></li>
-
-<li id="fn:fasta"><p>Things get more complicated if the sequence part of the <em>fasta</em> file spans multiple lines, as it often does. The way to deal with that is a bit more involved and will be a topic of a future
-post.</p>
- <a class="footnote-return" href="#fnref:fasta"><sup>[return]</sup></a></li>
+<li id="fn:1" role="doc-endnote">
+<p>If you&rsquo;re not sure which shell you&rsquo;re running, just run <code>chsh -s /bin/bash</code> on your prompt. That will enable bash for you. You don&rsquo;t have to worry too much about what this means - Bash is a good general choice for a lot of purposes. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>Writing this out every single time is actually not lazy enough for me - I will cover lazy stuff like aliases and text editor tricks in future posts. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>Things get more complicated if the sequence part of the <em>fasta</em> file spans multiple lines, as it often does. The way to deal with that is a bit more involved and will be a topic of a future
+post. <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
 </ol>
-</div>
+</section>
 
       </article>
 
@@ -361,7 +341,7 @@ post.</p>
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.53</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.80.0</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>
